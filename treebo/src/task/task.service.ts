@@ -9,24 +9,67 @@ export class TaskService {
   constructor(
     @Inject('TASK_REPOSITORY')
     private taskRepository: Repository<Task>
-  ){}
-  create(createTaskDto: CreateTaskDto) {
-    return this.taskRepository.save(createTaskDto);
+  ) { }
+  async create(createTaskDto: CreateTaskDto) {
+    try {
+      const data = await this.taskRepository.save(createTaskDto);
+      return {
+        message: 'Lista criada com sucesso',
+        data
+      };
+    } catch (error) {
+      return {
+        message: 'Erro ao cadastrar a lista',
+        data: []
+      };
+    }
   }
 
-  findAll(): Promise<Task[]>{
-    return this.taskRepository.find();
+  async findAll(): Promise<Task[]> {
+    try {
+      const data = await this.taskRepository.find();
+      return data;
+    } catch (error) {
+      return error
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOne(id: number): Promise<Task> {
+    try {
+      const data = await this.taskRepository.findOneBy({ id: id });
+      return data;
+    } catch (error) {
+      return error
+    };
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+    try {
+      const data = this.taskRepository.update({ id: id }, updateTaskDto);
+      return {
+        message: 'Lista atualizada com sucesso',
+        data
+      };
+    } catch (error) {
+      return {
+        message: 'Erro ao atualizar a lista',
+        data: []
+      };
+    }
   }
 
   remove(id: number) {
-    return `This action removes a #${id} task`;
+    try {
+      const data = this.taskRepository.delete({ id: id });
+      return {
+        message: 'Lista deletada com sucesso',
+        data
+      };
+    } catch (error) {
+      return {
+        message: 'Erro ao deletar a lista',
+        data: []
+      };
+    }
   }
 }
