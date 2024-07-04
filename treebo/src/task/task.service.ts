@@ -19,14 +19,14 @@ export class TaskService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} task`;
+    return this.taskRepository.findOneBy({id:id});
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+    return this.taskRepository.update({id:id}, updateTaskDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} task`;
+    return this.taskRepository.delete({id:id});
   }
 }
