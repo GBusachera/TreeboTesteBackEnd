@@ -12,5 +12,5 @@ export class CreateTaskDto {
     description: string;
 
     @Column()
-    status: Number;
+    status: boolean;
 }
