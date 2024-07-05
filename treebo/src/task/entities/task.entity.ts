@@ -12,5 +12,5 @@ export class Task {
   description: string;
 
   @Column()
-  status: Number;
+  status: boolean;
 }
