@@ -11,6 +11,6 @@ export class Task {
   @Column('text')
   description: string;
 
-  @Column()
+  @Column({ default: false })
   status: boolean;
 }
